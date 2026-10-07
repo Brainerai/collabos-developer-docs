@@ -1,0 +1,29 @@
+---
+title: "Webhooks"
+description: "Receive CollabOS events at your HTTPS endpoint."
+---
+
+Webhooks let your server react to CollabOS activity without repeatedly polling the API.
+
+## Basic flow
+
+<Steps>
+  <Step title="Create an endpoint">
+    Add an HTTPS webhook URL and choose at least one supported event type.
+  </Step>
+  <Step title="Store the signing secret">
+    Keep the endpoint secret securely on your server. You need it to verify every delivery.
+  </Step>
+  <Step title="Verify requests before processing">
+    Verify `X-Collabos-Signature` using the exact raw request body and timestamp. See [Signature verification](/webhooks/signatures).
+  </Step>
+  <Step title="Return a success response promptly">
+    Process quickly, or enqueue work and respond. Deliveries time out after 10 seconds.
+  </Step>
+</Steps>
+
+## Personal vs workspace webhooks
+
+Personal and workspace webhook subscriptions support different event sets. See [Webhook events](/webhooks/events).
+
+Webhook management uses `/api/developer/...` routes authenticated with a CollabOS dashboard/session JWT. Webhook deliveries themselves are signed with the endpoint secret.

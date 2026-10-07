@@ -1,0 +1,29 @@
+---
+title: "Scopes"
+description: "Grant an API key only the permissions your integration needs."
+---
+
+Scopes control what an API key can do. A request fails with `API_SCOPE_MISSING` when the key does not include the required scope.
+
+## Personal API key scopes
+
+| Scope | Allows |
+| --- | --- |
+| `profile:read` | Read the API-key owner's profile |
+| `raffles:read` | List and read published public raffles |
+| `entries:read` | Read the owner's raffle entries |
+| `entries:write` | Create, update, or withdraw the owner's native raffle entry |
+| `wins:read` | Read the owner's raffle wins |
+
+## Workspace API key scopes
+
+| Scope | Allows |
+| --- | --- |
+| `raffles:read` | List and read raffles owned by the workspace |
+| `entries:read` | Read entries for workspace raffles |
+| `winners:read` | Read finalized winners for workspace raffles |
+| `projects:read` | Read the developer-safe workspace project view |
+
+<Tip>
+Use the smallest set of scopes your integration needs. You can create separate keys for separate services or environments.
+</Tip>

@@ -1,0 +1,41 @@
+---
+title: "Webhook events"
+description: "Choose the events your personal or workspace endpoint should receive."
+---
+
+## Personal events
+
+| Event | Description |
+| --- | --- |
+| `raffle.entry.updated` | A relevant raffle entry changed |
+| `raffle.winner.finalized` | A winner was finalized |
+| `raffle.winner.corrected` | A finalized winner record was corrected |
+
+## Workspace events
+
+| Event | Description |
+| --- | --- |
+| `raffle.opened` | A workspace raffle opened |
+| `raffle.entry.updated` | An entry on a workspace raffle changed |
+| `raffle.finalized` | A workspace raffle was finalized |
+| `raffle.winner.finalized` | A winner was finalized |
+| `raffle.winner.corrected` | A finalized winner record was corrected |
+
+## Delivery envelope
+
+Webhook bodies use a common envelope:
+
+```json
+{
+  "id": "event_...",
+  "type": "raffle.entry.updated",
+  "createdAt": "2026-10-07T12:00:00.000Z",
+  "data": {}
+}
+```
+
+`data` depends on the event type.
+
+<Note>
+`test.ping` is used only by the explicit webhook test action. It is not a subscribable event type.
+</Note>

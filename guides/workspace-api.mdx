@@ -1,0 +1,28 @@
+---
+title: "Workspace API"
+description: "Read workspace-owned raffles, entries, winners, and project data."
+---
+
+Workspace API keys are scoped to exactly one CollabOS workspace.
+
+## Available reads
+
+- Workspace raffles
+- A single workspace raffle
+- Entries for a workspace raffle
+- Finalized winners for a workspace raffle
+- Developer-safe workspace projects
+
+The current workspace API is **read-only**. It does not create, edit, publish, cancel, or finalize raffles.
+
+## Workspace isolation
+
+Every workspace route contains a `workspaceId`, but the route value must match the workspace attached to the API key. A key for one workspace cannot read another workspace by changing the URL.
+
+## Project data
+
+`projects:read` returns an explicit developer-safe project view. Internal contact management, staff assignment, notes, winner-sheet URLs, and follow-up fields are not included.
+
+## Managing workspace developer access
+
+Workspace API keys and webhooks can be managed by active workspace **owners and admins** when the workspace has developer access through an eligible CollabOS workspace product.

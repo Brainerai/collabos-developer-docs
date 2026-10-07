@@ -1,0 +1,45 @@
+---
+title: "Errors"
+description: "Handle machine-readable errors from the API-key data plane."
+---
+
+The `/api/v1/...` API returns a stable error envelope with a machine-readable `code`.
+
+```json
+{
+  "statusCode": 400,
+  "error": "Bad Request",
+  "code": "INVALID_CURSOR",
+  "message": "cursor is invalid",
+  "requestId": "req_...",
+  "timestamp": "2026-10-07T12:00:00.000Z",
+  "path": "/api/v1/raffles"
+}
+```
+
+Use `code` for program logic and `message` for human-readable diagnostics.
+
+## Common codes
+
+| Code | Meaning |
+| --- | --- |
+| `INVALID_LIMIT` | `limit` is malformed or outside the endpoint's allowed range |
+| `INVALID_CURSOR` | Cursor is malformed or belongs to a different list contract |
+| `API_KEY_MISSING` | No supported API-key header was sent |
+| `API_KEY_INVALID` | Key is invalid, expired, revoked, or inactive |
+| `API_KEY_TYPE_MISMATCH` | Personal key used on workspace endpoint, or vice versa |
+| `API_SCOPE_MISSING` | Key does not have a required scope |
+| `WORKSPACE_MISMATCH` | Workspace in the route does not belong to the key |
+| `RAFFLE_NOT_FOUND` | Raffle is not available in the current API boundary |
+| `RATE_LIMITED` | The key exceeded its request allowance |
+| `BAD_REQUEST` | Generic bad request fallback |
+| `UNAUTHORIZED` | Generic authentication fallback |
+| `FORBIDDEN` | Generic authorization fallback |
+| `NOT_FOUND` | Generic missing-resource fallback |
+| `CONFLICT` | Request conflicts with current state |
+| `UNPROCESSABLE_ENTITY` | Request was understood but cannot be processed |
+| `INTERNAL_ERROR` | Unexpected server error |
+
+<Note>
+`/api/developer/...` management endpoints use the standard CollabOS management error envelope and do not guarantee the developer `code` field used by `/api/v1/...`.
+</Note>

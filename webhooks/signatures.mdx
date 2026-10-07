@@ -1,0 +1,51 @@
+---
+title: "Signature verification"
+description: "Verify that a webhook delivery came from CollabOS."
+---
+
+CollabOS signs the **exact raw JSON request body** with HMAC-SHA256.
+
+Each delivery includes:
+
+| Header | Purpose |
+| --- | --- |
+| `X-CollabOS-Event` | Event type |
+| `X-Collabos-Delivery` | Delivery identifier |
+| `X-Collabos-Timestamp` | Unix timestamp used in the signature |
+| `X-Collabos-Signature` | Signature in the form `v1=<hex>` |
+
+The signed value is:
+
+```text
+{timestamp}.{rawBody}
+```
+
+Expected signature:
+
+```text
+v1=HMAC_SHA256(endpoint_secret, "{timestamp}.{rawBody}")
+```
+
+## Node.js example
+
+```js
+import crypto from 'node:crypto';
+
+export function verifyCollabOSWebhook({ rawBody, timestamp, signature, secret }) {
+  const expected = `v1=${crypto
+    .createHmac('sha256', secret)
+    .update(`${timestamp}.${rawBody}`)
+    .digest('hex')}`;
+
+  const a = Buffer.from(expected);
+  const b = Buffer.from(signature ?? '');
+
+  return a.length === b.length && crypto.timingSafeEqual(a, b);
+}
+```
+
+<Warning>
+Verify against the raw request body, not a parsed-and-reserialized JSON object. Re-serialization can change bytes and invalidate the signature.
+</Warning>
+
+For additional replay protection, your application can reject timestamps that are too old and deduplicate deliveries using `X-Collabos-Delivery`.

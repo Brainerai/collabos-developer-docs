@@ -1,0 +1,33 @@
+---
+title: "API keys"
+description: "Create, scope, store, and revoke CollabOS API keys safely."
+---
+
+CollabOS supports personal and workspace API keys.
+
+| Type | Prefix | Typical use |
+| --- | --- | --- |
+| Personal | `co_u_` | User-owned integrations and native raffle entry actions |
+| Workspace | `co_w_` | Server-to-server workspace reads |
+
+## Key creation
+
+When a key is created, CollabOS returns the plaintext API key **once**. Store it securely at creation time. Later list responses expose only safe metadata such as the prefix and last four characters.
+
+If `scopes` is omitted, CollabOS applies the appropriate default scope set. An explicitly empty scope array is rejected.
+
+Keys can optionally expire. Expiry must be in the future and may be at most two years from creation.
+
+## Access requirements
+
+Personal API-key and webhook management requires CollabOS Premium.
+
+Workspace API-key and webhook management is available to active workspace owners/admins when the workspace has an eligible CollabOS workspace product.
+
+## Revocation
+
+Revoke a key when it is no longer needed or may have been exposed. A revoked key can no longer authenticate API requests.
+
+<Warning>
+Treat API keys like passwords. Do not commit them to Git, include them in frontend bundles, or send them to third-party analytics tools.
+</Warning>

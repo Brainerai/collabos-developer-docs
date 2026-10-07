@@ -1,0 +1,122 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "CollabOS Developers",
+  "theme": "mint",
+  "description": "Build with the CollabOS Developer API.",
+  "playground": {
+    "display": "simple"
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Guides",
+        "groups": [
+          {
+            "group": "Get started",
+            "pages": [
+              "index",
+              "quickstart",
+              "guides/authentication",
+              "guides/scopes"
+            ]
+          },
+          {
+            "group": "Using the API",
+            "pages": [
+              "guides/personal-api",
+              "guides/workspace-api",
+              "guides/pagination",
+              "guides/errors",
+              "guides/rate-limits"
+            ]
+          },
+          {
+            "group": "Developer settings",
+            "pages": [
+              "guides/api-keys"
+            ]
+          },
+          {
+            "group": "Webhooks",
+            "pages": [
+              "webhooks/overview",
+              "webhooks/events",
+              "webhooks/signatures",
+              "webhooks/retries"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "openapi": "openapi/developer-api.json",
+        "groups": [
+          {
+            "group": "Personal API",
+            "pages": [
+              "GET /api/v1/me",
+              "GET /api/v1/raffles",
+              "GET /api/v1/raffles/{slug}",
+              "GET /api/v1/entries",
+              "GET /api/v1/wins"
+            ]
+          },
+          {
+            "group": "Raffle entries",
+            "pages": [
+              "POST /api/v1/raffles/{slug}/entries",
+              "GET /api/v1/raffles/{slug}/entries/me",
+              "POST /api/v1/raffles/{slug}/entries/me/withdraw"
+            ]
+          },
+          {
+            "group": "Workspace API",
+            "pages": [
+              "GET /api/v1/workspaces/{workspaceId}/raffles",
+              "GET /api/v1/workspaces/{workspaceId}/raffles/{raffleId}",
+              "GET /api/v1/workspaces/{workspaceId}/raffles/{raffleId}/entries",
+              "GET /api/v1/workspaces/{workspaceId}/raffles/{raffleId}/winners",
+              "GET /api/v1/workspaces/{workspaceId}/projects"
+            ]
+          },
+          {
+            "group": "API key management",
+            "pages": [
+              "GET /api/developer/capabilities",
+              "GET /api/developer/personal/api-keys",
+              "POST /api/developer/personal/api-keys",
+              "DELETE /api/developer/personal/api-keys/{keyId}",
+              "GET /api/developer/workspaces/{workspaceId}/api-keys",
+              "POST /api/developer/workspaces/{workspaceId}/api-keys",
+              "DELETE /api/developer/workspaces/{workspaceId}/api-keys/{keyId}"
+            ]
+          },
+          {
+            "group": "Personal webhooks",
+            "pages": [
+              "GET /api/developer/personal/webhooks",
+              "POST /api/developer/personal/webhooks",
+              "PATCH /api/developer/personal/webhooks/{endpointId}",
+              "DELETE /api/developer/personal/webhooks/{endpointId}",
+              "POST /api/developer/personal/webhooks/{endpointId}/rotate-secret",
+              "POST /api/developer/personal/webhooks/{endpointId}/test",
+              "GET /api/developer/personal/webhooks/{endpointId}/deliveries"
+            ]
+          },
+          {
+            "group": "Workspace webhooks",
+            "pages": [
+              "GET /api/developer/workspaces/{workspaceId}/webhooks",
+              "POST /api/developer/workspaces/{workspaceId}/webhooks",
+              "PATCH /api/developer/workspaces/{workspaceId}/webhooks/{endpointId}",
+              "DELETE /api/developer/workspaces/{workspaceId}/webhooks/{endpointId}",
+              "POST /api/developer/workspaces/{workspaceId}/webhooks/{endpointId}/rotate-secret",
+              "POST /api/developer/workspaces/{workspaceId}/webhooks/{endpointId}/test",
+              "GET /api/developer/workspaces/{workspaceId}/webhooks/{endpointId}/deliveries"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

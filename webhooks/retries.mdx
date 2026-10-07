@@ -1,0 +1,26 @@
+---
+title: "Delivery and retries"
+description: "Understand webhook timeouts, retries, testing, and delivery history."
+---
+
+CollabOS webhook requests:
+
+- Time out after **10 seconds**.
+- Do **not** follow redirects.
+- Retry failed deliveries for up to **8 attempts**.
+
+Design your endpoint to return quickly. For heavier work, verify the request, enqueue the event, and respond before processing it asynchronously.
+
+## Test an endpoint
+
+The webhook management API includes a test action. It sends a `test.ping` delivery to the selected endpoint so you can verify connectivity and signature handling.
+
+`test.ping` is not a normal subscription event.
+
+## Delivery history
+
+You can request the **50 most recent deliveries** for a personal or workspace webhook endpoint through the management API. Delivery records include fields such as attempts, response status, error information, and delivery timestamps.
+
+## Rotate a secret
+
+Webhook secrets can be rotated through the management API. Update your receiver with the newly returned secret before relying on subsequent deliveries.

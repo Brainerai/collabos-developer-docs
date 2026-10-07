@@ -1,0 +1,33 @@
+---
+title: "Personal API"
+description: "Use a personal API key to read public raffle data and the key owner's own activity."
+---
+
+Personal API keys are designed for integrations acting on behalf of one CollabOS user.
+
+## What you can do
+
+- Read the API-key owner's profile.
+- List and read published public raffles.
+- List the owner's entries and wins.
+- Create or update a native raffle entry.
+- Read the owner's entry for a raffle.
+- Withdraw the owner's entry.
+
+## Discovery boundary
+
+The personal raffle API only returns raffles that are **public and published**. Private or community-only raffles are not exposed through the personal developer read API.
+
+## Entry actions
+
+Creating an entry still follows CollabOS raffle rules. The API does not bypass requirements, eligibility checks, wallet/identity rules, or raffle lifecycle state.
+
+The entry response is sanitized for developer use. Internal requirement configuration and secrets are not returned.
+
+## Availability
+
+Personal API keys and personal webhooks require an active CollabOS Premium entitlement.
+
+<Note>
+A personal key acts only as its owner. Cursors and request parameters cannot be used to switch to another user.
+</Note>

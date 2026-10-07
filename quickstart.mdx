@@ -1,0 +1,64 @@
+---
+title: "Quickstart"
+description: "Create an API key and make your first CollabOS request."
+---
+
+This guide uses a **personal API key** and reads the published public raffle list. The same authentication format works for workspace keys on workspace endpoints.
+
+<Steps>
+  <Step title="Create an API key">
+    Create a personal or workspace API key from CollabOS developer settings.
+
+    Personal keys start with `co_u_`. Workspace keys start with `co_w_`.
+
+    Copy the plaintext key when it is created. CollabOS does not return the full key again later.
+  </Step>
+  <Step title="Choose the right scope">
+    For this example, the key needs `raffles:read`.
+
+    See [Scopes](/guides/scopes) for the full list.
+  </Step>
+  <Step title="Make a request">
+
+```bash
+curl "https://YOUR_API_BASE_URL/api/v1/raffles?limit=10" \
+  -H "Authorization: Bearer $COLLABOS_API_KEY"
+```
+
+    You can also send the key with `X-API-Key`:
+
+```bash
+curl "https://YOUR_API_BASE_URL/api/v1/raffles?limit=10" \
+  -H "X-API-Key: $COLLABOS_API_KEY"
+```
+  </Step>
+  <Step title="Read the response">
+
+```json
+{
+  "data": [
+    {
+      "id": "raffle_...",
+      "slug": "example-raffle",
+      "title": "Example raffle",
+      "status": "OPEN"
+    }
+  ],
+  "pagination": {
+    "nextCursor": null,
+    "hasMore": false
+  }
+}
+```
+
+    When `hasMore` is `true`, pass `nextCursor` back as the next request's `cursor` value. Treat cursors as opaque strings.
+  </Step>
+</Steps>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Authentication" href="/guides/authentication" icon="key">How API keys are sent and how personal and workspace keys differ.</Card>
+  <Card title="Pagination" href="/guides/pagination" icon="list">Continue through larger result sets safely.</Card>
+  <Card title="Webhooks" href="/webhooks/overview" icon="webhook">Receive changes instead of polling.</Card>
+</CardGroup>

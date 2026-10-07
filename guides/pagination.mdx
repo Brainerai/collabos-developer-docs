@@ -1,0 +1,44 @@
+---
+title: "Pagination"
+description: "Use limit and cursor to move through CollabOS list responses."
+---
+
+Paginated endpoints return a `data` array and a `pagination` object.
+
+```json
+{
+  "data": [],
+  "pagination": {
+    "nextCursor": "opaque-cursor",
+    "hasMore": true
+  }
+}
+```
+
+## Continue to the next page
+
+When `hasMore` is `true`, copy `nextCursor` into the next request:
+
+```bash
+curl "https://YOUR_API_BASE_URL/api/v1/entries?limit=50&cursor=OPAQUE_CURSOR" \
+  -H "Authorization: Bearer $COLLABOS_API_KEY"
+```
+
+When `hasMore` is `false`, `nextCursor` is `null`.
+
+<Warning>
+Cursors are opaque. Do not decode, edit, construct, or reuse a cursor for a different endpoint.
+</Warning>
+
+## Limits
+
+| Endpoint | Default | Maximum |
+| --- | ---: | ---: |
+| Personal raffles | 50 | 100 |
+| Personal entries | 50 | 100 |
+| Personal wins | 50 | 100 |
+| Workspace raffles | 50 | 100 |
+| Workspace raffle entries | 100 | 250 |
+| Workspace projects | 50 | 100 |
+
+Invalid, fractional, zero, negative, or above-maximum limits return `400` with code `INVALID_LIMIT`.

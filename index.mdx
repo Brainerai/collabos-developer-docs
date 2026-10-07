@@ -1,0 +1,38 @@
+---
+title: "CollabOS Developer API"
+description: "Build raffle, entry, winner, project, and webhook integrations with CollabOS."
+---
+
+The CollabOS Developer API gives you a small, predictable way to read CollabOS data, work with native raffle entries, and receive webhook events.
+
+<CardGroup cols={2}>
+  <Card title="Personal integrations" icon="user" href="/guides/personal-api">
+    Read public raffles, the API-key owner's entries and wins, and create or withdraw native raffle entries.
+  </Card>
+  <Card title="Workspace integrations" icon="building" href="/guides/workspace-api">
+    Read raffles, entries, winners, and developer-safe project data for a workspace.
+  </Card>
+  <Card title="Webhooks" icon="webhook" href="/webhooks/overview">
+    Receive raffle, entry, and winner events without polling.
+  </Card>
+  <Card title="API reference" icon="code" href="/api-reference">
+    Look up exact request parameters, response schemas, and authentication requirements.
+  </Card>
+</CardGroup>
+
+## Two API surfaces
+
+CollabOS intentionally separates normal API usage from developer settings.
+
+| Surface | Prefix | Authentication | Use it for |
+| --- | --- | --- | --- |
+| Data API | `/api/v1/...` | Personal or workspace API key | Raffles, entries, wins, winners, projects |
+| Developer management | `/api/developer/...` | CollabOS dashboard/session JWT | Create and revoke keys, configure webhooks |
+
+<Note>
+The exported OpenAPI contract does not define a production server URL. In examples below, replace `https://YOUR_API_BASE_URL` with the API origin for your CollabOS deployment.
+</Note>
+
+## Start here
+
+If this is your first integration, follow the [Quickstart](/quickstart). You should be able to make your first authenticated request in a few minutes.
