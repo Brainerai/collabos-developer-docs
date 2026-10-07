@@ -14,15 +14,29 @@ Personal API keys are designed for integrations acting on behalf of one CollabOS
 - Read the owner's entry for a raffle.
 - Withdraw the owner's entry.
 
+## Example: list public raffles
+
+```bash
+curl "https://api.collabos.app/api/v1/raffles?limit=20" \
+  -H "Authorization: Bearer $COLLABOS_API_KEY"
+```
+
+## Example: read your entries
+
+```bash
+curl "https://api.collabos.app/api/v1/entries?limit=50" \
+  -H "Authorization: Bearer $COLLABOS_API_KEY"
+```
+
 ## Discovery boundary
 
 The personal raffle API only returns raffles that are **public and published**. Private or community-only raffles are not exposed through the personal developer read API.
 
 ## Entry actions
 
-Creating an entry still follows CollabOS raffle rules. The API does not bypass requirements, eligibility checks, wallet/identity rules, or raffle lifecycle state.
+Creating or updating an entry still follows CollabOS raffle rules. The API does not bypass requirements, eligibility checks, wallet or identity rules, or raffle lifecycle state.
 
-The entry response is sanitized for developer use. Internal requirement configuration and secrets are not returned.
+Developer entry responses are sanitized. Internal requirement configuration and secrets are not returned.
 
 ## Availability
 

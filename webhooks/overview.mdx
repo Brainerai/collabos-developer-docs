@@ -18,7 +18,7 @@ Webhooks let your server react to CollabOS activity without repeatedly polling t
     Verify `X-Collabos-Signature` using the exact raw request body and timestamp. See [Signature verification](/webhooks/signatures).
   </Step>
   <Step title="Return a success response promptly">
-    Process quickly, or enqueue work and respond. Deliveries time out after 10 seconds.
+    Verify the request, enqueue heavier work if needed, and respond quickly. Deliveries time out after 10 seconds.
   </Step>
 </Steps>
 
@@ -26,4 +26,13 @@ Webhooks let your server react to CollabOS activity without repeatedly polling t
 
 Personal and workspace webhook subscriptions support different event sets. See [Webhook events](/webhooks/events).
 
-Webhook management uses `/api/developer/...` routes authenticated with a CollabOS dashboard/session JWT. Webhook deliveries themselves are signed with the endpoint secret.
+Webhook management uses `/api/developer/...` routes authenticated with a CollabOS dashboard/session JWT. Webhook deliveries themselves are authenticated by the endpoint's signing secret.
+
+<CardGroup cols={2}>
+  <Card title="Webhook events" icon="list" href="/webhooks/events">
+    See the event types available to personal and workspace endpoints.
+  </Card>
+  <Card title="Verify signatures" icon="shield" href="/webhooks/signatures">
+    Validate the timestamp, raw request body, and HMAC-SHA256 signature.
+  </Card>
+</CardGroup>

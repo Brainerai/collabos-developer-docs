@@ -3,6 +3,8 @@ title: "Webhook events"
 description: "Choose the events your personal or workspace endpoint should receive."
 ---
 
+Subscribe only to the events your integration needs.
+
 ## Personal events
 
 | Event | Description |
@@ -34,7 +36,7 @@ Webhook bodies use a common envelope:
 }
 ```
 
-`data` depends on the event type.
+The shape of `data` depends on the event type. Use `type` to decide how your application handles the payload.
 
 <Note>
 `test.ping` is used only by the explicit webhook test action. It is not a subscribable event type.

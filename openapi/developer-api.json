@@ -5271,5 +5271,11 @@
       "RATE_LIMITED",
       "INTERNAL_ERROR"
     ]
-  }
+  },
+  "servers": [
+    {
+      "url": "https://api.collabos.app",
+      "description": "Production"
+    }
+  ]
 }

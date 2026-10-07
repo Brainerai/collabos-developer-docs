@@ -24,10 +24,14 @@ Personal API-key and webhook management requires CollabOS Premium.
 
 Workspace API-key and webhook management is available to active workspace owners/admins when the workspace has an eligible CollabOS workspace product.
 
+## Storage
+
+Store API keys in a secret manager or server environment variable. Do not put them in browser storage, frontend bundles, Git repositories, screenshots, support tickets, or analytics payloads.
+
 ## Revocation
 
 Revoke a key when it is no longer needed or may have been exposed. A revoked key can no longer authenticate API requests.
 
 <Warning>
-Treat API keys like passwords. Do not commit them to Git, include them in frontend bundles, or send them to third-party analytics tools.
+Treat API keys like passwords. Create separate keys for separate services or environments so one compromised key does not expose every integration.
 </Warning>

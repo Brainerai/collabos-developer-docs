@@ -17,28 +17,28 @@ The `/api/v1/...` API returns a stable error envelope with a machine-readable `c
 }
 ```
 
-Use `code` for program logic and `message` for human-readable diagnostics.
+Use `code` for program logic and `message` for human-readable diagnostics. Keep `requestId` when reporting an API problem so it can be correlated with server logs.
 
 ## Common codes
 
-| Code | Meaning |
-| --- | --- |
-| `INVALID_LIMIT` | `limit` is malformed or outside the endpoint's allowed range |
-| `INVALID_CURSOR` | Cursor is malformed or belongs to a different list contract |
-| `API_KEY_MISSING` | No supported API-key header was sent |
-| `API_KEY_INVALID` | Key is invalid, expired, revoked, or inactive |
-| `API_KEY_TYPE_MISMATCH` | Personal key used on workspace endpoint, or vice versa |
-| `API_SCOPE_MISSING` | Key does not have a required scope |
-| `WORKSPACE_MISMATCH` | Workspace in the route does not belong to the key |
-| `RAFFLE_NOT_FOUND` | Raffle is not available in the current API boundary |
-| `RATE_LIMITED` | The key exceeded its request allowance |
-| `BAD_REQUEST` | Generic bad request fallback |
-| `UNAUTHORIZED` | Generic authentication fallback |
-| `FORBIDDEN` | Generic authorization fallback |
-| `NOT_FOUND` | Generic missing-resource fallback |
-| `CONFLICT` | Request conflicts with current state |
-| `UNPROCESSABLE_ENTITY` | Request was understood but cannot be processed |
-| `INTERNAL_ERROR` | Unexpected server error |
+| Code | Meaning | What to do |
+| --- | --- | --- |
+| `INVALID_LIMIT` | `limit` is malformed or outside the endpoint range | Send an integer within the documented range |
+| `INVALID_CURSOR` | Cursor is malformed or belongs to another list contract | Restart pagination without the cursor |
+| `API_KEY_MISSING` | No supported API-key header was sent | Send Bearer auth or `X-API-Key` |
+| `API_KEY_INVALID` | Key is invalid, expired, revoked, or inactive | Create or use an active key |
+| `API_KEY_TYPE_MISMATCH` | Personal key used on a workspace endpoint, or vice versa | Use the required key type |
+| `API_SCOPE_MISSING` | Key does not have the required scope | Create/update a key with the required scope |
+| `WORKSPACE_MISMATCH` | Route workspace does not belong to the key | Use the workspace attached to the key |
+| `RAFFLE_NOT_FOUND` | Raffle is unavailable in the current API boundary | Check the identifier and visibility/ownership boundary |
+| `RATE_LIMITED` | The key exceeded its request allowance | Wait for `Retry-After` before retrying |
+| `BAD_REQUEST` | Generic bad request fallback | Check request parameters/body |
+| `UNAUTHORIZED` | Generic authentication fallback | Re-authenticate and verify credentials |
+| `FORBIDDEN` | Generic authorization fallback | Check key type, scope, and access |
+| `NOT_FOUND` | Generic missing-resource fallback | Verify the resource identifier |
+| `CONFLICT` | Request conflicts with current state | Refresh state and retry only when appropriate |
+| `UNPROCESSABLE_ENTITY` | Request was understood but cannot be processed | Correct the request according to the message |
+| `INTERNAL_ERROR` | Unexpected server error | Retry cautiously and retain `requestId` |
 
 <Note>
 `/api/developer/...` management endpoints use the standard CollabOS management error envelope and do not guarantee the developer `code` field used by `/api/v1/...`.

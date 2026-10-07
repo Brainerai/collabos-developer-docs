@@ -3,11 +3,11 @@ title: "Quickstart"
 description: "Create an API key and make your first CollabOS request."
 ---
 
-This guide uses a **personal API key** and reads the published public raffle list. The same authentication format works for workspace keys on workspace endpoints.
+This guide uses a **personal API key** to list published public raffles.
 
 <Steps>
   <Step title="Create an API key">
-    Create a personal or workspace API key from CollabOS developer settings.
+    Create a personal API key from CollabOS developer settings.
 
     Personal keys start with `co_u_`. Workspace keys start with `co_w_`.
 
@@ -18,17 +18,25 @@ This guide uses a **personal API key** and reads the published public raffle lis
 
     See [Scopes](/guides/scopes) for the full list.
   </Step>
-  <Step title="Make a request">
+  <Step title="Store the key in your environment">
 
 ```bash
-curl "https://YOUR_API_BASE_URL/api/v1/raffles?limit=10" \
+export COLLABOS_API_KEY="co_u_..."
+```
+
+    Keep API keys on a trusted server. Do not expose them in browser bundles or public source code.
+  </Step>
+  <Step title="Make your first request">
+
+```bash
+curl "https://api.collabos.app/api/v1/raffles?limit=10" \
   -H "Authorization: Bearer $COLLABOS_API_KEY"
 ```
 
-    You can also send the key with `X-API-Key`:
+    You can also authenticate with `X-API-Key`:
 
 ```bash
-curl "https://YOUR_API_BASE_URL/api/v1/raffles?limit=10" \
+curl "https://api.collabos.app/api/v1/raffles?limit=10" \
   -H "X-API-Key: $COLLABOS_API_KEY"
 ```
   </Step>
@@ -51,14 +59,14 @@ curl "https://YOUR_API_BASE_URL/api/v1/raffles?limit=10" \
 }
 ```
 
-    When `hasMore` is `true`, pass `nextCursor` back as the next request's `cursor` value. Treat cursors as opaque strings.
+    When `hasMore` is `true`, send `nextCursor` as the next request's `cursor` value. Treat cursors as opaque strings.
   </Step>
 </Steps>
 
 ## Next steps
 
 <CardGroup cols={3}>
-  <Card title="Authentication" href="/guides/authentication" icon="key">How API keys are sent and how personal and workspace keys differ.</Card>
+  <Card title="Authentication" href="/guides/authentication" icon="key">Understand key types and authentication headers.</Card>
   <Card title="Pagination" href="/guides/pagination" icon="list">Continue through larger result sets safely.</Card>
   <Card title="Webhooks" href="/webhooks/overview" icon="webhook">Receive changes instead of polling.</Card>
 </CardGroup>

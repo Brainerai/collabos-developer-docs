@@ -1,6 +1,6 @@
 ---
 title: "Pagination"
-description: "Use limit and cursor to move through CollabOS list responses."
+description: "Use limits and cursors to move through CollabOS list responses."
 ---
 
 Paginated endpoints return a `data` array and a `pagination` object.
@@ -20,7 +20,7 @@ Paginated endpoints return a `data` array and a `pagination` object.
 When `hasMore` is `true`, copy `nextCursor` into the next request:
 
 ```bash
-curl "https://YOUR_API_BASE_URL/api/v1/entries?limit=50&cursor=OPAQUE_CURSOR" \
+curl "https://api.collabos.app/api/v1/entries?limit=50&cursor=OPAQUE_CURSOR" \
   -H "Authorization: Bearer $COLLABOS_API_KEY"
 ```
 
@@ -41,4 +41,4 @@ Cursors are opaque. Do not decode, edit, construct, or reuse a cursor for a diff
 | Workspace raffle entries | 100 | 250 |
 | Workspace projects | 50 | 100 |
 
-Invalid, fractional, zero, negative, or above-maximum limits return `400` with code `INVALID_LIMIT`.
+Invalid, fractional, zero, negative, or above-maximum limits return HTTP `400` with code `INVALID_LIMIT`.

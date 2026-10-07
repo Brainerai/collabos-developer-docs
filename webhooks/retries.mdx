@@ -19,8 +19,10 @@ The webhook management API includes a test action. It sends a `test.ping` delive
 
 ## Delivery history
 
-You can request the **50 most recent deliveries** for a personal or workspace webhook endpoint through the management API. Delivery records include fields such as attempts, response status, error information, and delivery timestamps.
+You can request the **50 most recent deliveries** for a personal or workspace webhook endpoint through the management API. Delivery records include attempts, response status, error information, and delivery timestamps.
+
+Use delivery history when debugging timeouts, non-success responses, or signature/configuration problems.
 
 ## Rotate a secret
 
-Webhook secrets can be rotated through the management API. Update your receiver with the newly returned secret before relying on subsequent deliveries.
+Webhook secrets can be rotated through the management API. Store the newly returned secret securely and update your receiver before relying on subsequent deliveries.

@@ -29,14 +29,21 @@ If both headers are present, CollabOS uses the `Authorization` Bearer value.
 
 | Key type | Prefix | Can access |
 | --- | --- | --- |
-| Personal | `co_u_` | Personal profile, public raffles, the key owner's entries and wins, native entry actions |
-| Workspace | `co_w_` | Data belonging to the key's workspace: raffles, entries, winners, projects |
+| Personal | `co_u_` | Personal profile, published public raffles, the key owner's entries and wins, native entry actions |
+| Workspace | `co_w_` | Data belonging to one workspace: raffles, entries, winners, projects |
 
-A key cannot be used on an endpoint that requires the other key type.
+A personal key cannot be used on a workspace-only endpoint, and a workspace key cannot be used on a personal-only endpoint.
+
+## Example request
+
+```bash
+curl "https://api.collabos.app/api/v1/me" \
+  -H "Authorization: Bearer $COLLABOS_API_KEY"
+```
 
 ## Management authentication
 
-Routes under `/api/developer/...` are different. They use the authenticated CollabOS dashboard/session JWT, not a developer API key. These routes manage API keys and webhook endpoints.
+Routes under `/api/developer/...` are different. They use the authenticated CollabOS dashboard/session JWT, not a developer API key. These routes create and revoke API keys and manage webhook endpoints.
 
 <Warning>
 Never expose a CollabOS API key in browser JavaScript, public source code, logs, or client-side applications. Keep it on a trusted server.

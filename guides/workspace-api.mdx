@@ -15,13 +15,27 @@ Workspace API keys are scoped to exactly one CollabOS workspace.
 
 The current workspace API is **read-only**. It does not create, edit, publish, cancel, or finalize raffles.
 
+## Example: list workspace raffles
+
+```bash
+curl "https://api.collabos.app/api/v1/workspaces/WORKSPACE_ID/raffles?limit=20" \
+  -H "Authorization: Bearer $COLLABOS_WORKSPACE_API_KEY"
+```
+
+## Example: list workspace projects
+
+```bash
+curl "https://api.collabos.app/api/v1/workspaces/WORKSPACE_ID/projects?limit=50" \
+  -H "Authorization: Bearer $COLLABOS_WORKSPACE_API_KEY"
+```
+
 ## Workspace isolation
 
 Every workspace route contains a `workspaceId`, but the route value must match the workspace attached to the API key. A key for one workspace cannot read another workspace by changing the URL.
 
 ## Project data
 
-`projects:read` returns an explicit developer-safe project view. Internal contact management, staff assignment, notes, winner-sheet URLs, and follow-up fields are not included.
+`projects:read` returns an explicit developer-safe project view. Internal contact management, staff assignment, notes, winner-sheet URLs, creator IDs, and follow-up fields are not included.
 
 ## Managing workspace developer access
 

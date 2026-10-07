@@ -37,10 +37,13 @@ export function verifyCollabOSWebhook({ rawBody, timestamp, signature, secret })
     .update(`${timestamp}.${rawBody}`)
     .digest('hex')}`;
 
-  const a = Buffer.from(expected);
-  const b = Buffer.from(signature ?? '');
+  const expectedBytes = Buffer.from(expected);
+  const signatureBytes = Buffer.from(signature ?? '');
 
-  return a.length === b.length && crypto.timingSafeEqual(a, b);
+  return (
+    expectedBytes.length === signatureBytes.length &&
+    crypto.timingSafeEqual(expectedBytes, signatureBytes)
+  );
 }
 ```
 
@@ -48,4 +51,4 @@ export function verifyCollabOSWebhook({ rawBody, timestamp, signature, secret })
 Verify against the raw request body, not a parsed-and-reserialized JSON object. Re-serialization can change bytes and invalidate the signature.
 </Warning>
 
-For additional replay protection, your application can reject timestamps that are too old and deduplicate deliveries using `X-Collabos-Delivery`.
+For additional replay protection, reject timestamps that are too old for your application and deduplicate deliveries using `X-Collabos-Delivery`.

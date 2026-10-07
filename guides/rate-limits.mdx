@@ -5,7 +5,7 @@ description: "Understand the per-key request limit and response headers."
 
 API-key requests are limited to **120 requests per 60 seconds per API key**.
 
-CollabOS sends standard rate-limit information in response headers:
+CollabOS sends rate-limit information in response headers:
 
 | Header | Meaning |
 | --- | --- |
@@ -19,3 +19,10 @@ When the limit is exceeded, the API returns HTTP `429` with code `RATE_LIMITED`.
 ## Recommended retry behavior
 
 Use `Retry-After` when present. Avoid immediate repeated retries, and add a small amount of jitter if multiple workers share the same key.
+
+A simple retry flow is:
+
+1. Stop sending requests after a `429`.
+2. Read `Retry-After`.
+3. Wait at least that many seconds.
+4. Retry once, then back off again if another `429` is returned.

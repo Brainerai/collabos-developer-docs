@@ -12,7 +12,7 @@ Scopes control what an API key can do. A request fails with `API_SCOPE_MISSING` 
 | `profile:read` | Read the API-key owner's profile |
 | `raffles:read` | List and read published public raffles |
 | `entries:read` | Read the owner's raffle entries |
-| `entries:write` | Create, update, or withdraw the owner's native raffle entry |
+| `entries:write` | Create or update the owner's native raffle entry, and withdraw it |
 | `wins:read` | Read the owner's raffle wins |
 
 ## Workspace API key scopes
@@ -25,5 +25,5 @@ Scopes control what an API key can do. A request fails with `API_SCOPE_MISSING` 
 | `projects:read` | Read the developer-safe workspace project view |
 
 <Tip>
-Use the smallest set of scopes your integration needs. You can create separate keys for separate services or environments.
+Use the smallest set of scopes your integration needs. Separate keys are useful for different services, environments, or permission boundaries.
 </Tip>

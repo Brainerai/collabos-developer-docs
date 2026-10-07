@@ -2,7 +2,7 @@
   "$schema": "https://mintlify.com/docs.json",
   "name": "CollabOS Developers",
   "theme": "mint",
-  "description": "Build with the CollabOS Developer API.",
+  "description": "Build personal, workspace, and webhook integrations with the CollabOS Developer API.",
   "colors": {
     "primary": "#7C3AED",
     "light": "#8B5CF6",
